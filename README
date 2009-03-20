@@ -1,0 +1,5 @@
+Project: RSS Download
+Author: Craig Wilson 
+Homepage: http://cawilson.co.uk/?page_id=55
+
+Description: a simple perl script to download files from an RSS feed based on a RegEx
