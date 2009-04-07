@@ -14,7 +14,7 @@ $debug = 0; # set to 1 to stop program actually downloading also does not delete
 
 $infile = "./urls.list";	# The temp file that holds the rss feed
 $feedsfile = 'feeds'; 		# The file that contains all the feed links and names
-$destination = '/test/'		# The Destination to save fils
+$destination = '/test/';	# The Destination to save fils
 open(FEEDS, $feedsfile);	# open feedsfile for reading feed info
 @lines = <FEEDS>;
 
@@ -64,7 +64,9 @@ foreach $rss_link(@rss_link)
      print "Download:".$1."\n";			# Print linke to screen
      if ($debug == 0)
      {
-      exec ("pushd $destination && wget ".$1."&& popd"); # command = move to /test/, execute "wget link", move back to previous folder
+      print "download starting\n";
+      system ("pushd $destination && wget $1 && popd"); # command = move to /test/, execute "wget link", move back to previous folder
+      print "download stopping\n";
      }
     } #if $temp
    

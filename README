@@ -10,5 +10,7 @@ Description: a simple perl script to download files from an RSS feed based on a 
 
 Variables inside file to control most settings, only settings outside the actual script are the feeds themselves. these are stored in a file called 'feeds' (changable in the actual code if you so desire) and should be stored in the format 'NAME,RSS_FEED_URL'
 
+
+v1.1 - fixed bug that resulted in the program only downloading 1 item
 v1.0 - feeds split so each feed has it own downloaded file, 
 First Commit = very basic but working
