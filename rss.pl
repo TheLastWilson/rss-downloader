@@ -17,7 +17,7 @@ $feedsfile = 'feeds'; 		# The file that contains all the feed links and names
 $destination = '/test/';	# The Destination to save fils
 open(FEEDS, $feedsfile);	# open feedsfile for reading feed info
 @lines = <FEEDS>;
-
+$logfile = '/home/craig/Projects/rss-downloader/log.txt'; # location of the log file
 foreach $line(@lines)		# foreach loop to split the feeds file format = NAME,FEEDURL
 {
  @temp = split(/,/, $line);
@@ -25,7 +25,7 @@ foreach $line(@lines)		# foreach loop to split the feeds file format = NAME,FEED
  push(@rss_link, $temp[1]);	# store the link for the rss feed
 }
 
-$regex = 'enclosure url="(http://.*\.mp4)"'; 	# RegEx searching for shows in .mp4 format
+$regex = 'enclosure url="(http://.*\.m(p4|4v))"'; 	# RegEx searching for shows in .mp4 format
 my @matches; 	# Array to hold the details of matches from the RegEx
 
 $counter = 0;
@@ -65,7 +65,7 @@ foreach $rss_link(@rss_link)
      if ($debug == 0)
      {
       print "download starting\n";
-      system ("pushd $destination && wget $1 && popd"); # command = move to /test/, execute "wget link", move back to previous folder
+      system ("pushd $destination && wget $1 -nv -a $logfile && popd"); # command = move to /test/, execute "wget link", move back to previous folder
       print "download stopping\n";
      }
     } #if $temp
