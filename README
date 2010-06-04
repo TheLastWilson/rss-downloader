@@ -14,3 +14,12 @@ Variables inside file to control most settings, only settings outside the actual
 v1.1 - fixed bug that resulted in the program only downloading 1 item
 v1.0 - feeds split so each feed has it own downloaded file, 
 First Commit = very basic but working
+
+
+roadmap
+- arguements
+- individual regex for each feed
+- configurable option to delete previous episode of the show
+- reestablish websites, only been a year since they were up....
+
+
