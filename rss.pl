@@ -24,7 +24,7 @@ $default_regex = 'enclosure url="(http://.*\.m(p4|4v))"';   # RegEx searching fo
 
 
 foreach $line(@lines)	{	# foreach loop to split the feeds file format = NAME,FEEDURL
-  @temp = split(/,/, $line);
+  @temp = split(/[,\n]+/, $line);
   push(@names, $temp[0]);  	# store the name of the feed
   push(@rss_link, $temp[1]);	# store the link for the rss feed
   if($temp[2]){ push(@exp, $temp[2]); }
@@ -51,6 +51,7 @@ foreach $rss_link(@rss_link) {
 
   while ($line = <INFILE>){
     if ($line =~ $exp[$counter]) {  # Check RegEx
+      if($verbose eq 1) { print "MATCH! - $1\n"; }
       $temp = 0;
       foreach $prevdown(@prevdown) { # Check against ignore list
        if($1."\n" eq $prevdown) { $temp = 2; }
@@ -61,7 +62,7 @@ foreach $rss_link(@rss_link) {
         if ($verbose eq 1) { print "Download:".$1."\n";	}		# Print linke to screen
         if ($debug == 0) {
           if ( $verbose eq 1 ) { print "download starting\n"; }
-          system ("pushd $destination && wget $1 -nv -a $logfile && popd"); # command = move to /test/, execute "wget link", move back to previous folder
+          system ("wget -nc -c -P $destination $1 -nv -a $logfile"); # command = move to /test/, execute "wget link", move back to previous folder
           if ( $verbose eq 1 ) { print "download stopping\n"; }
         } else { print "download not starting(in debug mode) for $1\n"; }
       } #if $temp
